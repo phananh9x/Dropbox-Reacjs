@@ -29,8 +29,8 @@ class FileUpload extends Component {
             .then((res) => {
 
                 if (res.status == 200 || res.success) {
-                    this.props.afterlogin(res.userdetails);
-                    this.props.getFiles(res.userdetails.files);
+                    this.props.afterlogin(res.results);
+                    this.props.getFiles(res.results.files);
                     console.log("Success...")
 
                 }else if (res.status == 400 || !res.success || res.status == 500) {
@@ -45,16 +45,15 @@ class FileUpload extends Component {
         const payload = new FormData();
 
         payload.append('file', event.target.files[0]);
-
         payload.append('fileparent', this.state.fileparent);
         payload.append('isfile', 'T');
 
         API.uploadFile(payload)
         .then((res) => {
 
-            if (res.status == 204) {
-
-                this.props.addFile(res.filedata);
+            if (res.status == 200 || res.success) {
+                console.log(res)
+                this.props.addFile(res.results);
                 this.setState({
 
                     message: "File uploaded successfully"
@@ -190,7 +189,7 @@ class FileUpload extends Component {
             .then((res) => {
 
                 console.log(res.folderdata)
-                if (res.status == 204) {
+                if (res.status == 200 || res.success) {
 
                     this.props.addFile(res.folderdata);
                     const shareddata={file:res.folderdata, shareEmail:data.shareEmail}
@@ -219,11 +218,12 @@ class FileUpload extends Component {
                  fileparent:filedata.filepath
              });
 
-            API.getFileList(filedata.filepath)
+            API.getFileList(filedata._id)
                 .then((res) => {
                 if (res.status == 200 || res.success) {
-
-                    this.props.getFiles(res.files);
+                        console.log(res.results)
+                    this.props.getFiles(res.results.files);
+                    // this.props.history.push("/files/"+res.fileparent)
 
                 }else if (res.status == 400 || !res.success || res.status == 500) {
 
@@ -260,7 +260,7 @@ class FileUpload extends Component {
                     this.setState({
                         fileparent:""
                     });
-                    this.props.getFiles(res.userdetails.files);
+                    this.props.getFiles(res.results.files);
                     console.log("Success...")
 
                 }else if (res.status == 400 || !res.success || res.status == 500) {
@@ -295,7 +295,7 @@ class FileUpload extends Component {
 
                     type="file"
                     name="mypic"
-                    onChange={this.handleFileUpload}
+                    onChange={this.handleFileUpload.bind(this)}
                 />
                 </div>
                 <br/><br/>

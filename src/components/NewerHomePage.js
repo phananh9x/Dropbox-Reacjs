@@ -43,6 +43,11 @@ class NewerHomePage extends Component {
 
                     <FileUpload/>
                 )}/>
+                
+                 <Route exact path="/files/:filepath" render={() => (
+
+                    <FileUpload/>
+                )}/>
 
                 <Route exact path="/userdetails" render={() => (
 

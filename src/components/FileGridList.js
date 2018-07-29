@@ -98,11 +98,15 @@ class FileGridList extends Component {
 
                     <tbody>
 
-                    {this.props.filedata.files.map((file, index) => {
+                    {this.props.filedata.files && this.props.filedata.files.map((file, index) => {
 
 
                       //  if(file.fileparent==this.props.parentFile || (file.isfile=='T' && file.owner!= this.props.userEmail )) {
-                            var downloadlink= 'http://localhost:3001/files?filepath='+file.filepath
+                            var filepath = file.filepath.split("/")
+                            filepath.shift()
+                            filepath.shift()
+                            var downloadlink= 'http://localhost:3001/'+filepath.join("/")
+                            console.log(filepath)
                             return (
                                 <tr className="justify-content-md-center">
 
@@ -136,7 +140,8 @@ class FileGridList extends Component {
                                     <td>
                                         {file.isfile=='F'?
                                         <a href="#" className="link-title "
-                                               onClick={() => this.props.openFileFolder(file)}>
+                                                onClick={() => this.props.openFileFolder(file)}
+                                               >
                                                 {file.filename}
                                         </a>
                                         :

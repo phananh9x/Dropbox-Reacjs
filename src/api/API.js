@@ -74,9 +74,9 @@ export const getState = () =>
             return error;
         });
 
-export const getFileList = (filepath) =>
-    fetch(`${api}/files/getfiles?filepath=`+filepath,{
-        method: 'GET',
+export const getFileList = (id) =>
+    fetch(`${api}/files/`+id,{
+        method: 'POST',
         headers: {
             'token' : localStorage.getItem("token") ? localStorage.getItem("token") : ''
         },

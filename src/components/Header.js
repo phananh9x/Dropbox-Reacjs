@@ -36,8 +36,8 @@ class Header extends Component {
             .then((res) => {
 
                 if (res.status == 200 || res.success) {
-                    this.props.afterlogin(res.userdetails);
-                    this.props.getFiles(res.userdetails.files);
+                    this.props.afterlogin(res.results);
+                    this.props.getFiles(res.results.files);
                     this.props.history.push("/files")
                     console.log("Success...")
 
