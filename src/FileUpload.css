@@ -28,3 +28,6 @@ footer {
     }
     .row.content {height:auto;}
 }
+.link-title {
+    cursor: pointer;
+}

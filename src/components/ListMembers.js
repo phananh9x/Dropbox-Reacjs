@@ -16,19 +16,12 @@ class ListMembers extends Component {
     state = {message:''}
 
     componentWillMount(){
-console.log(this.props.group)
         API.getMembers(this.props.group)
             .then((res) => {
-
-                console.log(res)
                 if (res.status == 200 || res.success) {
-                    this.props.getMembers(res.members);
-                    console.log(res.members)
-                    this.setState({ message: res.message })
-                    console.log("Success...")
-
+                    this.props.getMembers(res.results.members);
+                    this.setState({ message: res.results.message })
                 }else if (res.status == 400 || !res.success || res.status == 500) {
-
                     this.setState({ message: res.message })
                 }
             });
@@ -36,18 +29,12 @@ console.log(this.props.group)
 
     deleteMember(index, member){
         member.owner=this.props.group.owner;
-console.log(member);
         API.deleteMember(member)
             .then((res) => {
-
-                console.log(res)
                 if (res.status == 200 || res.success) {
                     this.props.deleteMember(index);
-                    this.setState({ message: res.message })
-                    console.log("Success...")
-
+                    this.setState({ message: res.results.message })
                 }else if (res.status == 400 || !res.success || res.status == 500) {
-
                     this.props.history.push('/');
                 }
             });

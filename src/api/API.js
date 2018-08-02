@@ -290,7 +290,8 @@ export const shareFileInGroup = (filedata) =>
         method: 'POST',
         headers: {
             ...headers,
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'token' : localStorage.getItem("token") ? localStorage.getItem("token") : ''
         },
         body: JSON.stringify(filedata),
         

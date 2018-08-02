@@ -12,9 +12,10 @@ import ReactTable from "react-table";
 import "react-table/react-table.css";
 import index from "../reducers/index";
 
-
 class FileGridList extends Component {
-
+static propTypes = {
+    location: React.PropTypes.object.isRequired
+  }
 
 
     state = { index:'', isModalOpen: false, shareEmail:'', file:'' , group:'', downloadLink:''}
@@ -77,14 +78,42 @@ class FileGridList extends Component {
     };
 
 
+  
+  // onBackButtonEvent = (e) => {
+  //     e.preventDefault();
+  //       this.props.history.goBack();
+  //   }
 
+  //   componentDidMount = () => {
+  //     window.onpopstate = this.onBackButtonEvent;
+  //   }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.location !== prevProps.location) {
+        console.log(this.props.location)
+        // let arr = this.props.location.pathname.split("/")
+        // if (arr.length == 2) {
+        //     let folderId = arr[1];
+        //     API.getFileList(folderId)
+        //         .then((res) => {
+        //         if (res.status == 200 || res.success) {
+        //                 console.log(res.results)
+        //             this.props.getFiles(res.results.files);
+        //             this.props.history.push("/files/"+folderId)
+
+        //         }else if (res.status == 400 || !res.success || res.status == 500) {
+
+
+        //         }
+
+        //     });
+        // }
+    }
+  }
     render(){
-
-
     return (
 
         <div className="col-sm-6">
-
             <table className="table table-striped table-condensed table-hover table-bordered">
                     <thead>
                     <tr className="justify-content-md-left">
@@ -102,12 +131,14 @@ class FileGridList extends Component {
 
 
                       //  if(file.fileparent==this.props.parentFile || (file.isfile=='T' && file.owner!= this.props.userEmail )) {
-                            var filepath = file.filepath.split("/")
-                            filepath.shift()
-                            filepath.shift()
-                            var downloadlink= 'http://localhost:3001/'+filepath.join("/")
-                            console.log(filepath)
+                            if (file && file.isfile=='T') {
+                                var filepath = file.filepath.split("/")
+                                filepath.shift()
+                                filepath.shift()
+                                var downloadlink= 'http://localhost:3001/'+filepath.join("/")
+                            }
                             return (
+                           
                                 <tr className="justify-content-md-center">
 
                                     <td>
@@ -139,7 +170,7 @@ class FileGridList extends Component {
                                     </td>
                                     <td>
                                         {file.isfile=='F'?
-                                        <a href="#" className="link-title "
+                                        <a className="link-title "
                                                 onClick={() => this.props.openFileFolder(file)}
                                                >
                                                 {file.filename}

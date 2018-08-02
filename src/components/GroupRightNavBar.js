@@ -12,20 +12,17 @@ class GroupRightNavBar extends Component {
     state = { isModalOpen: false, groupname:'', message:''}
 
     addGroup(data){
-console.log(data)
         API.addGroup(data)
             .then((res) => {
 
                 console.log(res)
                 if (res.status == 200 || res.success) {
-                    console.log(res);
-
-                    this.props.addGroup(res.group);
-                    this.setState({ message: res.message })
+                    this.props.addGroup(res.results.group);
+                    this.setState({ message: res.results.message })
 
                 }else if (res.status == 400 || !res.success || res.status == 500) {
 
-                    this.setState({ message: res.message })
+                    this.setState({ message: res.results.message })
                 }
             });
     }

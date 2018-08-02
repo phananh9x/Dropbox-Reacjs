@@ -13,17 +13,11 @@ class MemberRightNavBar extends Component {
 
     addMember(data){
         data.group=this.props.group;
-
-        console.log(data)
         API.addMember(data)
             .then((res) => {
-
-                console.log(res)
                 if (res.status == 200 || res.success) {
-                    console.log(res);
-
-                    this.props.addMember(res.member);
-                    this.setState({ message: res.message })
+                    this.props.addMember(res.results.member);
+                    this.setState({ message: res.results.message })
 
                 }else if (res.status == 400 || !res.success || res.status == 500) {
 

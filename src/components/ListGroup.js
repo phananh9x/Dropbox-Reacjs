@@ -25,9 +25,9 @@ class ListGroup extends Component {
 
             console.log(res)
                 if (res.status == 200 || res.success) {
-                    this.props.getGroups(res.groups);
+                    this.props.getGroups(res.results.groups);
 
-                    this.setState({ message: res.message })
+                    this.setState({ message: res.results.message })
 
 
                 }else if (res.status == 400 || !res.success || res.status == 500) {
@@ -42,11 +42,9 @@ class ListGroup extends Component {
         API.deleteGroup(group)
             .then((res) => {
 
-                console.log(res)
                 if (res.status == 200 || res.success) {
                     this.props.deleteGroup(index);
-                    this.setState({ message: res.message })
-                    console.log("Success...")
+                    this.setState({ message: res.results.message })
 
                 }else if (res.status == 400 || !res.success || res.status == 500) {
 
@@ -56,7 +54,6 @@ class ListGroup extends Component {
     }
 
     render() {
-        console.log(this.props.groupdata)
         return (
 
             <div className="col-sm-6">

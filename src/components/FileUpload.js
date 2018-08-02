@@ -13,7 +13,7 @@ import {getFiles} from "../actions/index";
 import {sharedCount} from "../actions/index";
 import Header from "./Header";
 import { Route, withRouter } from 'react-router-dom';
-
+import { browserHistory } from 'react-router';
 
 
 class FileUpload extends Component {
@@ -22,22 +22,76 @@ class FileUpload extends Component {
         message: '',
         fileparent:''
     };
+    componentWillReceiveProps(nextProps) {
+        // alert(nextProps.match.params.filepath)
+        if (this.props.match.params != nextProps.match.params) {
+            if (nextProps.match.params&& nextProps.match.params.filepath) {
+                API.getFileList(nextProps.match.params.filepath)
+                    .then((res) => {
+                    if (res.status == 200 || res.success) {
+                        this.setState({
+                             fileparent:res.results.filepath
+                         });
+                        this.props.getFiles(res.results.files);
+
+                    }else if (res.status == 400 || !res.success || res.status == 500) {
+
+
+                    }
+
+                });
+            }else {
+                API.getState()
+                    .then((res) => {
+
+                        if (res.status == 200 || res.success) {
+                            this.props.afterlogin(res.results);
+                            this.props.getFiles(res.results.files);
+                            console.log("Success...")
+
+                        }else if (res.status == 400 || !res.success || res.status == 500) {
+
+                            this.props.history.push('/');
+                        }
+                    });
+            }
+        }
+        
+    }
 
     componentWillMount(){
+        // alert(this.props.match.params.filepath)
         //const data=localStorage.getItem("email")
-        API.getState()
-            .then((res) => {
-
+        if (this.props.match.params&& this.props.match.params.filepath) {
+            API.getFileList(this.props.match.params.filepath)
+                .then((res) => {
                 if (res.status == 200 || res.success) {
-                    this.props.afterlogin(res.results);
+                    this.setState({
+                         fileparent:res.results.filepath
+                     });
                     this.props.getFiles(res.results.files);
-                    console.log("Success...")
 
                 }else if (res.status == 400 || !res.success || res.status == 500) {
 
-                    this.props.history.push('/');
+
                 }
+
             });
+        }else {
+            API.getState()
+                .then((res) => {
+
+                    if (res.status == 200 || res.success) {
+                        this.props.afterlogin(res.results);
+                        this.props.getFiles(res.results.files);
+                        console.log("Success...")
+
+                    }else if (res.status == 400 || !res.success || res.status == 500) {
+
+                        this.props.history.push('/');
+                    }
+                });
+        }
     }
 
     handleFileUpload = (event) => {
@@ -98,8 +152,7 @@ class FileUpload extends Component {
             .then((res) => {
 
                 if (res.status == 200 || res.success) {
-
-                    this.props.addFile(res.folderdata);
+                    this.props.addFile(res.results.folderdata);
                     this.setState({
 
                         message: res.message
@@ -211,19 +264,20 @@ class FileUpload extends Component {
 
 
     openFileFolder=(filedata) =>{
-
+        console.log(filedata)
+        // window.location.href = "http://localhost:3000/files/"+ filedata._id
         if(filedata.isfile=='F'){
 
             this.setState({
                  fileparent:filedata.filepath
              });
 
-            API.getFileList(filedata._id)
+            API.getFileList(filedata._id)   
                 .then((res) => {
                 if (res.status == 200 || res.success) {
                         console.log(res.results)
                     this.props.getFiles(res.results.files);
-                    // this.props.history.push("/files/"+res.fileparent)
+                    this.props.history.push("/files/"+filedata._id)
 
                 }else if (res.status == 400 || !res.success || res.status == 500) {
 
@@ -274,7 +328,6 @@ class FileUpload extends Component {
     render() {
 
 
-        console.log(this.state.fileparent);
         return (
 
             <div className="container-fluid">
