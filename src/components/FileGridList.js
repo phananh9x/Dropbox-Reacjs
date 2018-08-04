@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Row,Col,ListGroupItem} from 'react-bootstrap';
+import {Row,Col,ListGroupItem , Table} from 'react-bootstrap';
 import Modal from 'react-modal';
 
 import '../FileUpload.css';
@@ -114,13 +114,15 @@ static propTypes = {
     return (
 
         <div className="col-sm-6">
-            <table className="table table-striped table-condensed table-hover table-bordered">
+            <Table bordered condensed>
                     <thead>
-                    <tr className="justify-content-md-left">
+                    <tr>
 
                         <th>Type</th>
                         <th>Name</th>
                         <th>Members</th>
+                        <th>Delete</th>
+                        <th>Share</th>
 
                     </tr>
                     </thead>
@@ -139,10 +141,10 @@ static propTypes = {
                             }
                             return (
                            
-                                <tr className="justify-content-md-center">
+                                <tr >
 
                                     <td>
-                                        <div className="row justify-content-md-left">
+                                        <div className="row">
 
                                             <div className="col-md-1">
                                                 {file.starred==true?
@@ -186,7 +188,7 @@ static propTypes = {
                                     <td>
                                         {file.sharedcount===0?
                                             <div>Only You</div>:
-                                        <div className="row justify-content-md-left">
+                                        <div className="row">
                                             <div className="col-md-1">{file.sharedcount}</div>
                                             <div>members</div>
                                         </div>
@@ -195,13 +197,13 @@ static propTypes = {
                                     </td>
 
                                     <td>
-                                        <button className="btn btn-primary" type="submit"
+                                        <button className="btn btn-danger" type="submit"
                                                 onClick={() => this.props.deleteFile(index, file)}>
                                             Delete
                                         </button>
                                     </td>
                                     <td>
-                                        <button className="btn btn-primary" type="submit"
+                                        <button className="btn btn-info" type="submit"
                                                 onClick={() => this.openModal(index, file, downloadlink)}>
                                             Share
                                         </button>
@@ -213,7 +215,7 @@ static propTypes = {
                      //   }
                     })}
                     </tbody>
-                </table>
+                </Table>
                 <Modal isOpen={this.state.isModalOpen} style={this.style} onClose={() => this.closeModal()}>
                     <ListGroupItem>
 

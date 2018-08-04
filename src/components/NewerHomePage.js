@@ -19,7 +19,7 @@ class NewerHomePage extends Component {
         return (
             <div>
                 <Route exact path="/" render={() => (
-                    <div className="jumbotron">
+                    <div className="jumbotron" style={{backgroundColor : 'white'}}>
                        <div className="row justify-content-md-center">
                             <div className="col-md-6">
 

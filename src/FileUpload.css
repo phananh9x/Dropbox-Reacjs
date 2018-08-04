@@ -31,3 +31,7 @@ footer {
 .link-title {
     cursor: pointer;
 }
+
+tbody td {
+    text-align: start
+}

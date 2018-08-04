@@ -39,7 +39,7 @@ class UserLog extends Component {
         return (
             <div>
                 <Header/>
-            <div className="jumbotron">
+            <div className="jumbotron" style={{backgroundColor : 'white'}}>
                 <div className="container-fluid row justify-content-md-center">
 
                     <div className="account-wall col-md-10">

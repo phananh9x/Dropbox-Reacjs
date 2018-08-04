@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import * as API from '../api/API';
 import FileGridList from "./FileGridList";
+import {Button} from 'react-bootstrap';
 import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
 import {connect} from 'react-redux';
@@ -339,17 +340,18 @@ class FileUpload extends Component {
                     </div>)
                 }
 
-            <div className="jumbotron">
+            <div className="jumbotron" style={{backgroundColor : 'white'}}>
 
                 <div className="row justify-content-md-center">
 
-
-                <TextField
-
+                <input
+                    ref={input => this.addFile = input}
+                    style={{display: 'none'}}
                     type="file"
                     name="mypic"
                     onChange={this.handleFileUpload.bind(this)}
                 />
+               <Button bsStyle="success" onClick={() => this.addFile.click()}>Add document</Button>
                 </div>
                 <br/><br/>
 
