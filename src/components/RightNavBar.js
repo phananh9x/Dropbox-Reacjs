@@ -42,7 +42,7 @@ class RightNavBar extends Component {
     render(){
 console.log(this.props.parentFile)
         return(
-        <div className="col-sm-2 sidenav">
+        <div className="col-sm-12 sidenav">
             { this.props.parentFile==""?
                 <button className="btn btn-primary btn-block" type="submit"
                         onClick={() => this.openSharedFolderModal()}>

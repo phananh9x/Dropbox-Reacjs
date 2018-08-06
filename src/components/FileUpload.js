@@ -367,17 +367,17 @@ class FileUpload extends Component {
                     </div>
 
                     <div className="row">
-                        <LeftNavBar/>
-                        <div className="col-sm-1 "></div>
-                        <FileGridList deleteFile={this.deleteFile}
-                                      sharefileingroup={this.sharefileingroup}
-                                      sharefile={this.sharefile}
-                                      openFileFolder={this.openFileFolder}
-                                      parentFile={this.state.fileparent}/>
-                        <div className="col-sm-1 "></div>
-                        <RightNavBar makeFolder={this.makeFolder}
+                    <div className="col-sm-2 col">
+                        <LeftNavBar  makeFolder={this.makeFolder}
                                      makeSharedFolder={this.makeSharedFolder}
                                      parentFile={this.state.fileparent}/>
+                    </div>
+                    <FileGridList deleteFile={this.deleteFile}
+                      sharefileingroup={this.sharefileingroup}
+                      sharefile={this.sharefile}
+                      openFileFolder={this.openFileFolder}
+                      parentFile={this.state.fileparent}/>
+                       
                     </div>
                 </div>
 

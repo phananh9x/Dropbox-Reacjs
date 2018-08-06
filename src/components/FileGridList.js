@@ -113,11 +113,10 @@ static propTypes = {
     render(){
     return (
 
-        <div className="col-sm-6">
+        <div className="col-sm-10">
             <Table bordered condensed>
                     <thead>
                     <tr>
-
                         <th>Type</th>
                         <th>Name</th>
                         <th>Members</th>
@@ -130,8 +129,6 @@ static propTypes = {
                     <tbody>
 
                     {this.props.filedata.files && this.props.filedata.files.map((file, index) => {
-
-
                       //  if(file.fileparent==this.props.parentFile || (file.isfile=='T' && file.owner!= this.props.userEmail )) {
                             if (file && file.isfile=='T') {
                                 var filepath = file.filepath.split("/")
@@ -214,6 +211,7 @@ static propTypes = {
                             );
                      //   }
                     })}
+                    {!this.props.filedata.files.length && <tr> <td colSpan="5" style={{    textAlign: 'center'}}>No data.</td></tr> }
                     </tbody>
                 </Table>
                 <Modal isOpen={this.state.isModalOpen} style={this.style} onClose={() => this.closeModal()}>
