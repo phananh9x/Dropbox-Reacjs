@@ -1,4 +1,4 @@
-const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://localhost:3001'
+const api = process.env.REACT_APP_CONTACTS_API_URL || 'https://dropbox-server.herokuapp.com'
 
 const headers = {
     'Accept': 'application/json',
