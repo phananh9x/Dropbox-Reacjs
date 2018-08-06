@@ -44,7 +44,7 @@ console.log(this.state.group.members)
                     </div>)
                 }
 */}
-                <div className="jumbotron">
+                <div className="jumbotron" style={{backgroundColor : 'white'}}>
 
 
 
@@ -52,21 +52,13 @@ console.log(this.state.group.members)
 
 
                         <div className="row">
-                            <LeftNavBar/>
-                            <div className="col-sm-1"></div>
+                            <div className="col-sm-2 col">
+                                <LeftNavBar isGroup={true} state={this.state} navigatetogroups={this.navigatetogroups}/>
+                            </div>
                             {this.state.entergroup==''?
                                 <ListGroup openGroup={this.openGroup}/>
                                 :
                                 <ListMembers group={this.state.group}/>}
-
-                            <div className="col-sm-1 "></div>
-                            {this.state.entergroup==''?
-                                <GroupRightNavBar/>
-                                :
-                                <MemberRightNavBar index={this.state.index}
-                                                   group={this.state.group}
-                                                   navigatetogroups={this.navigatetogroups}/>}
-
                         </div>
                     </div>
                 </div>

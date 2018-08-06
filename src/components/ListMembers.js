@@ -44,17 +44,16 @@ class ListMembers extends Component {
         console.log(this.props.memberdata)
         return (
 
-            <div className="col-sm-6">
+            <div className="col-sm-10">
 
-                <table className="table table-striped table-condensed table-hover table-bordered">
+                <table className="table table-condensed table-bordered">
                     <thead>
                     <tr className="justify-content-md-left">
-
                         <th></th>
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Group</th>
-
+                        <th>Delete</th>
                     </tr>
                     </thead>
 
@@ -68,7 +67,6 @@ class ListMembers extends Component {
                                     <div className="row justify-content-md-left">
                                         <div className="col-md-1"><i className="fa fa-user" ></i></div>
                                         {/*{/!*<div>&#9734;</div>*!/}*/}
-
 
                                     </div>
                                 </td>

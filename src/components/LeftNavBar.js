@@ -3,7 +3,8 @@ import '../FileUpload.css';
 import { Route, withRouter } from 'react-router-dom';
 import Modal from 'react-modal';
 import {Row,Col,ListGroupItem} from 'react-bootstrap';
-
+import GroupRightNavBar from "./GroupRightNavBar";
+import MemberRightNavBar from "./MemberRightNavBar";
 
 class LeftNavBar extends Component {
 
@@ -41,10 +42,16 @@ class LeftNavBar extends Component {
     };
 
 
-    render(){
-        return(
-            <div className="col-sm-12 sidenav">
 
+    render(){
+        const { isGroup } = this.props
+
+        return(
+            <div>
+            <div className="col-sm-12">
+
+                <button className="btn btn-primary btn-block" type="submit"
+                        onClick={() => this.props.history.push("/files")}>My Document</button>
                 <button className="btn btn-primary btn-block" type="submit"
                         onClick={() => this.props.history.push("/userdetails")}>User Profile</button>
                 <button className="btn btn-primary btn-block" type="submit"
@@ -52,21 +59,27 @@ class LeftNavBar extends Component {
                     User Activity
                 </button>
 
-            { this.props.parentFile==""?
-                <button className="btn btn-primary btn-block" type="submit"
-                        onClick={() => this.openSharedFolderModal()}>
-                    New Shared Folder
-                </button>:''
+                
+            {!isGroup && 
+                <div style={{marginTop: 10}}>
+                    { this.props.parentFile==""?
+                        <button className="btn btn-primary btn-block" type="submit"
+                                onClick={() => this.openSharedFolderModal()}>
+                            New Shared Folder
+                        </button>:''
+                    }
+                    <button className="btn btn-primary btn-block" type="submit"
+                            onClick={() => this.openModal()}>
+                        New Folder
+                    </button>
+        
+                    <button className="btn btn-primary btn-block" type="submit"
+                            onClick={() => this.props.history.push('/groups')}>
+                        Groups
+                    </button>
+                </div>
             }
-            <button className="btn btn-primary btn-block" type="submit"
-                    onClick={() => this.openModal()}>
-                New Folder
-            </button>
-
-            <button className="btn btn-primary btn-block" type="submit"
-                    onClick={() => this.props.history.push('/groups')}>
-                Groups
-            </button>
+            
             <Modal isOpen={this.state.isModalOpen} style={this.style} onClose={() => this.closeModal()}>
                 <ListGroupItem>
                     <Row className="show-grid">
@@ -106,6 +119,13 @@ class LeftNavBar extends Component {
                     </div>
                 </div>
             </Modal>
+            </div>
+            {this.props.state && this.props.state.entergroup==''?
+                                <GroupRightNavBar/>
+                                : this.props.state &&
+                                <MemberRightNavBar index={this.props.state.index}
+                                                   group={this.props.state.group}
+                                                   navigatetogroups={this.props.navigatetogroups}/>}
             </div>
 
         )}

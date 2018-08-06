@@ -368,7 +368,7 @@ class FileUpload extends Component {
 
                     <div className="row">
                     <div className="col-sm-2 col">
-                        <LeftNavBar  makeFolder={this.makeFolder}
+                    <LeftNavBar  makeFolder={this.makeFolder}
                                      makeSharedFolder={this.makeSharedFolder}
                                      parentFile={this.state.fileparent}/>
                     </div>

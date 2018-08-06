@@ -134,7 +134,7 @@ static propTypes = {
                                 var filepath = file.filepath.split("/")
                                 filepath.shift()
                                 filepath.shift()
-                                var downloadlink= 'http://localhost:3001/'+filepath.join("/")
+                                var downloadlink= 'https://dropbox-server.herokuapp.com/'+filepath.join("/")
                             }
                             return (
                            

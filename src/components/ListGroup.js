@@ -56,7 +56,7 @@ class ListGroup extends Component {
     render() {
         return (
 
-            <div className="col-sm-6">
+            <div className="col-sm-10">
 
                 <table className="table table-striped table-condensed table-hover table-bordered">
                     <thead>
@@ -66,7 +66,7 @@ class ListGroup extends Component {
                         <th>Group Name</th>
                         <th>Members</th>
                         <th>Manager</th>
-
+                        <th>Delete</th>
                     </tr>
                     </thead>
 

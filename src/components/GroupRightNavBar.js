@@ -57,7 +57,7 @@ class GroupRightNavBar extends Component {
     render(){
 
         return(
-            <div className="col-sm-2 sidenav">
+            <div className="col-sm-12" style={{marginTop: 10}}>
 
                 <button className="btn btn-primary btn-block" type="submit"
                         onClick={() => this.openModal()}>
